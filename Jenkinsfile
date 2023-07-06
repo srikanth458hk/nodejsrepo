@@ -5,7 +5,7 @@ pipeline {
     stage('Build') {
       steps {
         git branch: 'main', url: 'https://github.com/srikanth458hk/nodejsrepo.git'
-        sh 'docker build -t node-app .'
+        sh 'docker build -t nodejs .'
       }
     }
 
@@ -20,7 +20,7 @@ pipeline {
             sh "aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin ${nodejs}"
 
             // Tag Docker image with ECR repository
-            sh "docker tag node-app:latest ${dockerTag}"
+            sh "docker tag nodejs:latest ${dockerTag}"
 
             // Push Docker image to ECR
             sh "docker push ${dockerTag}"
