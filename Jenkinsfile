@@ -24,7 +24,7 @@ pipeline {
                         secretKeyVariable: 'IDJ2c/vOM3OHmvPwK+sR07ha/kGmAvnEEEWVXhx3',
                         credentialsId: 'nodejs'
                     ]]) {
-                        sh "docker login -u AWS -p \$(AWS_SECRET_ACCESS_KEY) -e none https://$(125523629880).dkr.ecr.$(ap-south-1).amazonaws.com"
+                        sh "docker login -u AWS -p \$(AKIAR2OOKS44LIAQLO75) -e none https://$(125523629880).dkr.ecr.$(ap-south-1).amazonaws.com"
                     }
                     
                     
