@@ -11,7 +11,7 @@ pipeline {
 
     stage('Push') {
       steps {
-        sh 'docker image push nodejs/images:hackathon-starter-ver0.1'
+        sh 'docker image push nodejs/images:nodeja-ver0.1'
         
       }
     }
