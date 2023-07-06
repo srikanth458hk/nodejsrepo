@@ -23,9 +23,11 @@ pipeline {
                         accessKeyVariable: 'AKIAR2OOKS44LIAQLO75',
                         secretKeyVariable: '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',
                         credentialsId: 'nodejs'
-                    ]]) {
-                        sh "docker login -u AWS -p $(AKIAR2OOKS44LIAQLO75) -e none https://$(125523629880).dkr.ecr.$(ap-south-1).amazonaws.com"
-                    }
+                    ]]) 
+                        
+                        sh "aws ecr get-login-password --region ${ap-south-1} | docker login --username AWS --password-stdin ${125523629880}.dkr.ecr.${ap-south-1}.amazonaws.com"
+
+                    
                     
                     
                     sh "docker tag ${dockerTag} ${125523629880}.dkr.ecr.${ap-south-1}.amazonaws.com/${nodejs}:${dockerTag}"
