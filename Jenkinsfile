@@ -14,7 +14,7 @@ pipeline {
         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'nodejs']]) {
           script {
             def ecrRepo = '125523629880.dkr.ecr.ap-south-1.amazonaws.com/nodejs'
-            def dockerTag = "${ecrRepo}:latest"
+            def dockerTag = "${nodejs}:latest"
 
             // Authenticate to ECR
             sh "aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin ${nodejs}"
