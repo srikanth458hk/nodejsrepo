@@ -24,3 +24,5 @@ pipeline {
         sh "docker push 125523629880.dkr.ecr.ap-south-1.amazonaws.com/nodejs:latest"
   }
 }
+}
+}
