@@ -5,44 +5,28 @@ pipeline {
     stage('Build') {
       steps {
         git branch: 'main', url: 'https://github.com/srikanth458hk/nodejsrepo.git'
-        
+        sh 'docker build -t node-app .'
       }
     }
-     stage('Build and Push Docker Image') {
-            steps {
-                script {
-                    def dockerTag = "nodejs:${env.BUILD_NUMBER}"
-                    def ecrRepo = "nodejs"
-                    
-              
-                    sh "docker build -t ${dockerTag} ."
-                    
-                 
-                    withCredentials([[
-                        $class: 'AmazonWebServicesCredentialsBinding',
-                        accessKeyVariable: 'AKIAR2OOKS44LIAQLO75',
-                        secretKeyVariable: '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',
-                        credentialsId: 'nodejs'
-                    ]]) 
-                        
-                        sh "aws ecr get-login-password --region ${ap-south-1} | docker login --username AWS --password-stdin ${125523629880}.dkr.ecr.${ap-south-1}.amazonaws.com"
 
-                    
-                    
-                    
-                    sh "docker tag ${dockerTag} ${125523629880}.dkr.ecr.${ap-south-1}.amazonaws.com/${nodejs}:${dockerTag}"
-                    
-                    
-                    sh "docker push ${125523629880}.dkr.ecr.${ap-south-1}.amazonaws.com/${nodejs}:${dockerTag}"
-                }
-            }
+    stage('Push') {
+      steps {
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'nodejs']]) {
+          script {
+            def ecrRepo = '125523629880.dkr.ecr.ap-south-1.amazonaws.com/nodejs'
+            def dockerTag = "${ecrRepo}:latest"
+
+            // Authenticate to ECR
+            sh "aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin ${ecrRepo}"
+
+            // Tag Docker image with ECR repository
+            sh "docker tag node-app:latest ${dockerTag}"
+
+            // Push Docker image to ECR
+            sh "docker push ${dockerTag}"
+          }
         }
+      }
     }
+  }
 }
-
-  
-
-  
-
-
-
