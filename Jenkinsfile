@@ -9,8 +9,8 @@ pipeline {
         sh 'docker build -t node-app .'
       }
     }
-    stage{
-     steps ('Push') {
+    stage ('Push') {
+     steps  {
         script {
           def ecrLogin = sh(
             returnStdout: true,
