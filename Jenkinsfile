@@ -24,14 +24,13 @@ pipeline {
     }
     stage('DeploytoECS') {
       steps {
-        script {
-          def awsCliPath = tool 'aws-cli'
-         sh "${awsCliPath}/arn:aws:ecs:ap-south-1:125523629880:task-definition/nodejstask:1"
-         sh "${awsC liPath}/aws ecs update-service --cluster Nodejscluster --service nodejsservice --task-definition nodejstask:nodejstask:1"
+        
+         sh "arn:aws:ecs:ap-south-1:125523629880:task-definition/nodejstask:1"
+         sh "aws ecs update-service --cluster Nodejscluster --service nodejsservice --task-definition nodejstask:nodejstask:1"
 
         }
       }
-    }
+    
 
     
     
