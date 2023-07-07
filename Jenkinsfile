@@ -17,7 +17,7 @@ pipeline {
             def dockerTag = "${ecrRepo}:latest"
 
             // Authenticate to ECR
-            sh "aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin ${nodejs}"
+            sh "aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin ${ecrRepo}"
 
             // Tag Docker image with ECR repository
             sh "docker tag nodejs:latest ${dockerTag}"
