@@ -15,6 +15,13 @@ pipeline {
 
       }
     }
+    stage('PushintoECR') {
+      steps {
+        sh 'docker tag nodejs:latest public.ecr.aws/y6s3n1h9/nodejs:latest'
+        sh 'docker push public.ecr.aws/y6s3n1h9/nodejs:latest'
+
+      }
+    }
 
     
     
