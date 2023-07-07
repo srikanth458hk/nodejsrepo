@@ -30,7 +30,7 @@ pipeline {
        
           git branch: 'master', url: 'https://github.com/terraform-aws-modules/terraform-aws-ecs.git'
           sh 'terraform init' 
-          sh 'terraform apply -y'
+          sh 'terraform apply -auto-approve'
       }
    }
   }
