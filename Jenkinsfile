@@ -4,14 +4,14 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        chmod +x build.sh
+        sh 'chmod +x build.sh'
         sh './build.sh'
       }
     }
     stage('Push') {
       steps {
         
-        chmod +x push.sh
+        sh 'chmod +x push.sh'
         sh './push.sh'
 
       }
